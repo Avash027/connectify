@@ -1,0 +1,45 @@
+.homeIcon {
+  cursor: pointer;
+  margin: 10px;
+  height: 15px;
+  width: 15px;
+  margin-right: 200px;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 12px 0px;
+  cursor: pointer;
+  color: var(--color-primary);
+}
+
+.navItemBar {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 12px 0px;
+  cursor: pointer;
+  color: var(--color-primary);
+}
+
+.navItemsActive {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 12px 0px;
+  cursor: pointer;
+  color: #171717;
+  background-color: var(--color-primary);
+}
+
+.navItems:hover {
+  color: #171717;
+  background-color: var(--color-primary);
+}
+
+.navIcons {
+  margin-right: 10px;
+  margin-left: 5px;
+}
