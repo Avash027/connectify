@@ -7,6 +7,7 @@ const ChatModel = require("../models/ChatModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const isEmail = require("validator/lib/isEmail");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
 const userPng =
@@ -117,6 +118,19 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Server error");
+  }
+});
+
+router.get("/user", authMiddleware, async (req, res) => {
+  const { userId } = req;
+  console.log(userId);
+  try {
+    const user = await UserModel.findById(userId);
+    const userFollowStats = await FollowerModel.findOne({ user: userId });
+    return res.status(200).json({ user, userFollowStats });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("Unathorized");
   }
 });
 

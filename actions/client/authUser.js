@@ -27,6 +27,13 @@ export const loginUser = async (user, setError) => {
   }
 };
 
+export const redirectUser = (ctx, location) => {
+  if (ctx.req) {
+    ctx.res.writeHead(302, { Location: location }); // if ctx is in backend
+    ctx.res.end();
+  } else Router.push("/");
+};
+
 const setToken = (token) => {
   cookie.set("token", token);
   Router.push("/");
