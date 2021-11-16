@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "server": "nodemon server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,12 +12,24 @@
     "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
     "@fortawesome/free-regular-svg-icons": "^6.0.0-beta2",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.1.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.13",
     "next": "12.0.3",
+    "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-typeahead": "^6.0.0-alpha.4",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-infinite-scroll-component": "^6.1.0",
+    "socket.io": "^4.3.2",
+    "socket.io-client": "^4.3.2",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",

@@ -1,54 +1,158 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
   Form,
   Button,
   InputGroup,
   FormControl,
-  Row,
-  Col,
+  Toast,
   Spinner,
 } from "react-bootstrap";
-
 import {
   container,
   header,
   background,
   signUpText,
 } from "../styles/Signup.module.css";
+import baseUrl from "../utils/client/baseUrl";
+import { registerUser } from "../actions/client/authUser";
+
+let cancel;
 
 const signup = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  //Make form disabled
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setusername] = useState("");
+  const [usernameLoading, setusernameLoading] = useState(false);
+  const [usernameAvailable, setusernameAvailable] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+
+    await registerUser(user, setError, setFormLoading);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUser((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const checkUserName = async () => {
+    setusernameLoading(true);
+    try {
+      cancel && cancel();
+
+      const { CancelToken } = axios;
+
+      const res = await axios.get(`${baseUrl}/api/auth/username/${username}`, {
+        cancelToken: new CancelToken((canceler) => (cancel = canceler)),
+      });
+      if (res.data === "Available") {
+        setusernameAvailable(true);
+        if (errorMessage === "User Name not available") setErrorMessage(null);
+        setUser((prev) => ({ ...prev, username }));
+      }
+    } catch (err) {
+      setErrorMessage("User Name not available");
+      setusernameAvailable(false);
+    }
+    setusernameLoading(false);
+  };
+
+  useEffect(() => {
+    if (username === "") setusernameAvailable(false);
+    else checkUserName();
+  }, [username]);
 
   return (
     <>
-      <div className={background}></div>
+      <div className={background}>
+        <Toast
+          className="p-3"
+          position="top-left"
+          bg="light"
+          onClose={() => setError(false)}
+          delay={3000}
+          autohide
+          show={error}
+        >
+          <Toast.Header>
+            <strong className="me-auto">Connectify</strong>
+          </Toast.Header>
+          <Toast.Body>Invalid credentials</Toast.Body>
+        </Toast>
+      </div>
       <div className={container}>
         <h3 className={header}>Singup</h3>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Fullname</Form.Label>
-            <Form.Control type="email" placeholder="Full name" />
+            <Form.Control
+              type="text"
+              placeholder="Full name"
+              name="name"
+              value={user.name}
+              onChange={handleChange}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
             <InputGroup className="mb-3">
-              <FormControl placeholder="Username" type="text" />
+              <FormControl
+                placeholder="Username"
+                type="text"
+                value={username}
+                isInvalid={
+                  !usernameAvailable &&
+                  !usernameLoading &&
+                  username.length !== 0
+                }
+                onChange={(e) => setusername(e.target.value)}
+              />
               <InputGroup.Text>
-                {/* <Spinner animation="border" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner> */}
-                {/* <i className="far fa-times-circle" style={{ color: "red" }}></i> */}
-                {/* <i
-                  className="fas fa-check-circle"
-                  style={{ color: "green" }}
-                ></i> */}
+                {usernameLoading ? (
+                  <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                ) : usernameAvailable ? (
+                  <i
+                    className="fas fa-check-circle"
+                    style={{ color: "green" }}
+                  ></i>
+                ) : (
+                  <i
+                    className="far fa-times-circle"
+                    style={{ color: "red" }}
+                  ></i>
+                )}
               </InputGroup.Text>
             </InputGroup>
           </Form.Group>
@@ -57,6 +161,9 @@ const signup = () => {
             <Form.Label>Password</Form.Label>
             <InputGroup className="mb-3">
               <FormControl
+                name="password"
+                value={user.password}
+                onChange={handleChange}
                 placeholder="Password"
                 type={showPassword ? "text" : "password"}
               />
@@ -69,12 +176,19 @@ const signup = () => {
             </InputGroup>
           </Form.Group>
 
-          <Button style={{ width: "100%" }} variant="primary" type="submit">
+          <Button
+            style={{ width: "100%" }}
+            variant="primary"
+            type="submit"
+            loading={formLoading}
+            disabled={formLoading}
+          >
             Submit
           </Button>
         </Form>
         <div className={signUpText}>
-          Dont have an account a account ? <a href="/signup">Sign up instead</a>
+          Already have an account a account ?{" "}
+          <a href="/login">Log in instead</a>
         </div>
       </div>
     </>
