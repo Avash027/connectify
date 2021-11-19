@@ -1,0 +1,74 @@
+.card {
+  display: grid;
+  height: 45rem;
+  width: 40%;
+  border: solid 1px grey;
+  border-radius: 5px;
+  grid-template-rows: 1fr 5fr 3fr;
+  margin: 20px auto;
+  min-width: 20rem;
+}
+
+.header {
+  display: grid;
+
+  grid-template-columns: 1fr 5fr 1fr;
+}
+
+.profileImage {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.headerTitle {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.headerTitle:hover {
+  text-decoration: underline;
+}
+
+.headerSubtitle {
+  margin-left: 0.6rem;
+  font-weight: 200;
+}
+
+.postImage {
+  height: 25rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.postCaptionContainer {
+  margin-top: 1rem;
+  padding: 0px 10px;
+}
+
+.moreComment {
+  color: gray;
+}
+
+.moreComment:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.modalContainer {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 5px;
+}
+
+.modalImage {
+  height: 30rem;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}

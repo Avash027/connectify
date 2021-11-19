@@ -16,12 +16,17 @@ import {
   navItemBar,
 } from "../styles/Navbar.module.css";
 import Searchbar from "./Searchbar";
+import { useRouter } from "next/router";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
+  const router = useRouter();
+
   const [showNavbar, setShowNavbar] = useState(false);
 
   const handleOpen = () => setShowNavbar(true);
   const handleClose = () => setShowNavbar(false);
+
+  const pathName = router.pathname;
 
   return (
     <>
@@ -32,22 +37,31 @@ const Navbar = () => {
         </Offcanvas.Header>
         <Offcanvas.Body style={{ padding: "0", backgroundColor: "#171717" }}>
           <Stack>
-            <div className={navItemsActive}>
-              <i className={`fab fa-facebook-messenger ${navIcons}`}></i>
+            <div className={pathName === "/" ? navItemsActive : navItems}>
+              <div className={`fab fa-facebook-messenger ${navIcons}`}></div>
               Messages
             </div>
-            <div className={navItems}>
-              <i className={`fas fa-compass ${navIcons}`}></i> Explore
+            <div
+              className={pathName === "/explore" ? navItemsActive : navItems}
+            >
+              <div className={`fas fa-compass ${navIcons}`}></div> Explore
             </div>
-            <div className={navItems}>
-              <i className={`fas fa-heart ${navIcons}`}></i> Notifications
+            <div
+              className={
+                pathName === "/notifications" ? navItemsActive : navItems
+              }
+            >
+              <div className={`fas fa-heart ${navIcons}`}></div> Notifications
             </div>
 
-            <div className={navItems}>
-              <i className={`fas fa-heart ${navIcons}`}></i> Profile
-            </div>
+            <a
+              href={`/${user.username}`}
+              className={pathName === "/profile" ? navItemsActive : navItems}
+            >
+              <div className={`fas fa-heart ${navIcons}`}></div> Profile
+            </a>
 
-            <div className={navItems}>
+            <div className={pathName === "/logout" ? navItemsActive : navItems}>
               <i className={`fas fa-sign-out-alt ${navIcons}`}></i> logout
             </div>
             <div className={navItemBar}>

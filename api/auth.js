@@ -88,10 +88,10 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body.user;
 
-  if (!isEmail(email)) res.status(401).send("Invalid email");
+  if (!isEmail(email)) return res.status(401).send("Invalid email");
 
   if (password.length < 6)
-    res.status(401).send("Password must be at least 6 characters");
+    return res.status(401).send("Password must be at least 6 characters");
 
   try {
     const user = await UserModel.findOne({ email: email.toLowerCase() }).select(
@@ -123,11 +123,12 @@ router.post("/login", async (req, res) => {
 
 router.get("/user", authMiddleware, async (req, res) => {
   const { userId } = req;
-  console.log(userId);
+
   try {
     const user = await UserModel.findById(userId);
     const userFollowStats = await FollowerModel.findOne({ user: userId });
-    return res.status(200).json({ user, userFollowStats });
+
+    res.status(200).json({ user, userFollowStats });
   } catch (error) {
     console.log(error);
     res.status(400).send("Unathorized");

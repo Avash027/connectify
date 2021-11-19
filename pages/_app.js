@@ -52,7 +52,6 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
       pageProps.user = user;
       pageProps.userFollowStats = userFollowStats;
     } catch (error) {
-      console.log(error);
       destroyCookie(ctx, "token");
       redirectUser(ctx, "/login");
     }
