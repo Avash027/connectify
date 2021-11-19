@@ -1,4 +1,4 @@
-import { Placeholder, Card } from "react-bootstrap";
+import { Placeholder, Card, Stack } from "react-bootstrap";
 
 export const PlaceHolder = () => {
   return (
@@ -36,5 +36,19 @@ export const NoPosts = () => {
     <div style={{ textAlign: "center" }}>
       No more posts <a href="/">Click here to refresh the page</a>
     </div>
+  );
+};
+
+export const FollowerPlaceHolder = () => {
+  return (
+    <>
+      {["5", "7", "1", "2"].map((elem) => (
+        <div key={elem}>
+          <Placeholder as={Card.Title} animation="glow">
+            <Placeholder xs={Number(elem)} />
+          </Placeholder>
+        </div>
+      ))}
+    </>
   );
 };

@@ -48,7 +48,7 @@ export default function LikeModal({
               <Stack
                 direction="horizontal"
                 gap={2}
-                key={like._id}
+                key={index}
                 style={{ marginBottom: "1rem" }}
               >
                 <Image

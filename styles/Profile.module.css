@@ -1,0 +1,54 @@
+.container {
+  width: 80vw;
+  margin: auto;
+  height: 20rem;
+
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+.imageContainer {
+  height: inherit;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  height: 70%;
+  padding: 0;
+}
+
+.button {
+  width: 80%;
+}
+
+.info {
+  width: 80vw;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  margin-top: -2rem;
+  text-align: center;
+}
+
+.userStats {
+  display: flex;
+  justify-content: space-evenly;
+  height: 4rem;
+  align-items: center;
+}
+
+.statsTab {
+  align-items: center;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
