@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { parseCookies } from "nookies";
 import baseUrl from "../utils/client/baseUrl";
-import { Stack, Image, Button } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import cookie from "js-cookie";
 
 import ProfileHeader from "../components/Profile/ProfileHeader";
@@ -17,7 +17,15 @@ const UserProfile = ({
   user,
   userFollowStats,
 }) => {
-  if (errorLoading) return <>Something went wrong</>;
+  if (errorLoading)
+    return (
+      <Alert
+        style={{ textAlign: "center", margin: "auto", width: "60%" }}
+        variant="danger"
+      >
+        <span className="fas fa-user-slash"></span> User not found
+      </Alert>
+    );
 
   const router = useRouter();
   const [posts, setPosts] = useState([]);
@@ -27,7 +35,13 @@ const UserProfile = ({
   const ownAccount = profile.user._id === user._id;
 
   useEffect(() => {
-    getPosts(setLoading, router.query.username, cookie.get("token"), setPosts);
+    if (!errorLoading)
+      getPosts(
+        setLoading,
+        router.query.username,
+        cookie.get("token"),
+        setPosts
+      );
   }, [router.query.username]);
 
   return (
