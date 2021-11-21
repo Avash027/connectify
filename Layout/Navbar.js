@@ -35,37 +35,45 @@ const Navbar = ({ user }) => {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Instagram</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body style={{ padding: "0", backgroundColor: "#171717" }}>
+        <Offcanvas.Body style={{ padding: "0" }}>
           <Stack>
-            <div className={pathName === "/" ? navItemsActive : navItems}>
+            <a
+              href="/messages"
+              className={pathName === "/" ? navItemsActive : navItems}
+            >
               <div className={`fab fa-facebook-messenger ${navIcons}`}></div>
               Messages
-            </div>
-            <div
+            </a>
+            <a
+              href="/explore"
               className={pathName === "/explore" ? navItemsActive : navItems}
             >
               <div className={`fas fa-compass ${navIcons}`}></div> Explore
-            </div>
-            <div
+            </a>
+            <a
+              href="/notifications"
               className={
                 pathName === "/notifications" ? navItemsActive : navItems
               }
             >
               <div className={`fas fa-heart ${navIcons}`}></div> Notifications
-            </div>
+            </a>
 
             <a
               href={`/${user.username}`}
-              className={pathName === "/profile" ? navItemsActive : navItems}
+              className={pathName === `/[username]` ? navItemsActive : navItems}
             >
               <div className={`fas fa-heart ${navIcons}`}></div> Profile
             </a>
-
-            <div className={pathName === "/logout" ? navItemsActive : navItems}>
+            {/* Change it later */}
+            <a
+              href={`/logout`}
+              className={pathName === "/logout" ? navItemsActive : navItems}
+            >
               <i className={`fas fa-sign-out-alt ${navIcons}`}></i> logout
-            </div>
+            </a>
             <div className={navItemBar}>
-              <Searchbar />
+              <Searchbar router={router} />
             </div>
           </Stack>
         </Offcanvas.Body>

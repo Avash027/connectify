@@ -24,7 +24,6 @@ const UserProfile = ({
   const [loading, setLoading] = useState(false);
   const [loggedUserFollowStats, setLoggedUserFollowStats] =
     useState(userFollowStats);
-
   const ownAccount = profile.user._id === user._id;
 
   useEffect(() => {

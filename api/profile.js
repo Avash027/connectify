@@ -184,7 +184,7 @@ router.post("/update", authMiddleware, async (req, res) => {
   try {
     const { userId } = req;
 
-    const { bio, profilePicUrl } = req.body;
+    const { bio, profilePicUrl, name } = req.body;
 
     let profileField = {
       user: userId,
@@ -197,11 +197,15 @@ router.post("/update", authMiddleware, async (req, res) => {
       { new: true }
     );
 
+    const user = await UserModel.findById(userId);
     if (profilePicUrl) {
-      const user = await UserModel.findById(userId);
       user.profilePicUrl = profilePicUrl;
-      await user.save();
     }
+    if (name) {
+      user.name = name;
+    }
+
+    await user.save();
 
     return res.status(200).send("success");
   } catch (error) {

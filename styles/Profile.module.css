@@ -2,7 +2,6 @@
   width: 80vw;
   margin: auto;
   height: 20rem;
-
   display: grid;
   grid-template-columns: 2fr 4fr;
 }
@@ -17,7 +16,8 @@
 }
 
 .image {
-  height: 70%;
+  height: 15rem;
+  width: 15rem;
   padding: 0;
 }
 

@@ -6,6 +6,7 @@ import styles from "../../styles/Profile.module.css";
 
 import FollowerModal from "./FollowerModal";
 import FollowingModal from "./FollowingModal";
+import EditModal from "./EditModal";
 
 //TODO : when following someone it is not added to following list unless re rendered
 //Please kill me
@@ -23,6 +24,7 @@ const ProfileHeader = ({
   const [showFollowerModal, setShowFollowerModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false); // TODO
 
   const isFollowing =
     loggedUserFollowStats.following.length > 0 &&
@@ -74,6 +76,12 @@ const ProfileHeader = ({
         setLoggedUserFollowStats={setLoggedUserFollowStats}
       />
 
+      <EditModal
+        user={user}
+        showEditModal={showEditModal}
+        setShowEditModal={setShowEditModal}
+      />
+
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <Image
@@ -86,7 +94,11 @@ const ProfileHeader = ({
           <Stack style={{ display: "flex", justifyContent: "center" }} gap={2}>
             <h2 style={{ fontWeight: "200" }}>{profile.user.username}</h2>
             {ownAccount && (
-              <Button variant="outline-dark" className={styles.button}>
+              <Button
+                onClick={() => setShowEditModal(true)}
+                variant="outline-dark"
+                className={styles.button}
+              >
                 Edit Profile
               </Button>
             )}
@@ -142,7 +154,7 @@ const ProfileHeader = ({
         <div>
           {" "}
           <h3>{profile.user.name}</h3>
-          <h5 style={{ fontWeight: "300" }}>{profile.user.bio}</h5>
+          <h5 style={{ fontWeight: "300" }}>{profile.bio}</h5>
         </div>
         <div></div>
       </div>

@@ -34,25 +34,24 @@ export const unfollowUser = async (userToUnFollowId, setUserFollowStats) => {
   }
 };
 
-//TODO add username and name change to profile update
-
 export const profileUpdate = async (
-  profile,
+  bio,
+  name,
   setLoading,
   setError,
   profilePicUrl
 ) => {
   try {
-    const { bio } = profile;
-
     await Axios.post(`/update`, {
       bio,
+      name,
       profilePicUrl,
     });
     setLoading(false);
     Router.reload();
   } catch (error) {
-    setError(catchErrors(error));
+    alert(error);
+    setError(error);
     setLoading(false);
   }
 };

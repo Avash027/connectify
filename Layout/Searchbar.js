@@ -1,57 +1,80 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { InputGroup, Button } from "react-bootstrap";
+import axios from "axios";
+import baseUrl from "../utils/client/baseUrl";
+import cookie from "js-cookie";
 
-const SEARCH_URI = "https://api.github.com/search/users";
+//TODO hanndle no profile
 
-const Searchbar = () => {
+const Searchbar = ({ router }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
-  const handleSearch = (query) => {
+  const ref = useRef();
+
+  const handleSearch = async (query) => {
     setIsLoading(true);
 
-    fetch(`${SEARCH_URI}?q=${query}+in:login&page=1&per_page=50`)
-      .then((resp) => resp.json())
-      .then(({ items }) => {
-        const options = items.map((i) => ({
-          avatar_url: i.avatar_url,
-          id: i.id,
-          login: i.login,
-        }));
+    const { data } = await axios.get(`${baseUrl}/api/search/${query}`, {
+      headers: { Authorization: cookie.get("token") },
+    });
 
-        setOptions(options);
-        setIsLoading(false);
-      });
+    const options = data.map((option) => ({
+      profilePicUrl: option.profilePicUrl,
+      username: option.username,
+      id: option._id,
+    }));
+
+    setOptions(options);
+    setIsLoading(false);
+  };
+
+  const handleClick = (username) => {
+    window.location.href = `${baseUrl}/${username}`;
   };
 
   const filterBy = () => true;
 
   return (
-    <AsyncTypeahead
-      style={{ width: "100%", height: "60px" }}
-      filterBy={filterBy}
-      id="async-example"
-      isLoading={isLoading}
-      labelKey="login"
-      minLength={3}
-      onSearch={handleSearch}
-      options={options}
-      placeholder="Search for a Github user..."
-      renderMenuItemChildren={(option, props) => (
-        <>
-          <img
-            alt={option.login}
-            src={option.avatar_url}
-            style={{
-              height: "24px",
-              marginRight: "10px",
-              width: "24px",
-            }}
-          />
-          <span>{option.login}</span>
-        </>
-      )}
-    />
+    <>
+      <InputGroup>
+        <AsyncTypeahead
+          style={{ width: "100%", height: "60px" }}
+          filterBy={filterBy}
+          id="async-example"
+          ref={ref}
+          isLoading={isLoading}
+          labelKey="username"
+          minLength={1}
+          onSearch={handleSearch}
+          options={options}
+          placeholder="Username"
+          renderMenuItemChildren={(option, props) => (
+            <div onClick={() => handleClick(option.username)}>
+              <img
+                alt={option.id}
+                src={option.profilePicUrl}
+                style={{
+                  height: "24px",
+                  marginRight: "10px",
+                  width: "24px",
+                  borderRadius: "50%",
+                }}
+              />
+              <span>{option.username}</span>
+            </div>
+          )}
+        />
+
+        <Button
+          variant="outline-secondary"
+          onClick={() => handleClick(ref.current.state.text)}
+        >
+          <span className="fas fa-search"></span>
+        </Button>
+      </InputGroup>
+    </>
   );
 };
 

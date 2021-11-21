@@ -1,7 +1,7 @@
 import axios from "axios";
 import baseUrl from "../../utils/client/baseUrl";
-import Router from "next/router";
 import cookie from "js-cookie";
+import Router from "next/router";
 
 //TODO Set proper error message
 export const registerUser = async (user, setError, setLoading) => {
@@ -21,8 +21,10 @@ export const loginUser = async (user, setError) => {
     const { data } = await axios.post(`${baseUrl}/api/auth/login`, {
       user,
     });
+
     setToken(data);
   } catch (err) {
+    console.log(err);
     setError(true);
   }
 };
@@ -36,5 +38,5 @@ export const redirectUser = (ctx, location) => {
 
 const setToken = (token) => {
   cookie.set("token", token);
-  Router.push("/");
+  Router.reload();
 };
