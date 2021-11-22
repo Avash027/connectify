@@ -14,6 +14,7 @@ import {
   navIcons,
   navItemsActive,
   navItemBar,
+  navImage,
 } from "../styles/Navbar.module.css";
 import Searchbar from "./Searchbar";
 import { useRouter } from "next/router";
@@ -38,8 +39,15 @@ const Navbar = ({ user }) => {
         <Offcanvas.Body style={{ padding: "0" }}>
           <Stack>
             <a
-              href="/messages"
+              href="/"
               className={pathName === "/" ? navItemsActive : navItems}
+            >
+              <div className={`fas fa-home ${navIcons}`}></div>
+              Feed
+            </a>
+            <a
+              href="/messages"
+              className={pathName === "/messages" ? navItemsActive : navItems}
             >
               <div className={`fab fa-facebook-messenger ${navIcons}`}></div>
               Messages
@@ -56,15 +64,20 @@ const Navbar = ({ user }) => {
                 pathName === "/notifications" ? navItemsActive : navItems
               }
             >
-              <div className={`fas fa-heart ${navIcons}`}></div> Notifications
+              <div
+                style={{ color: user.unreadNotification ? "red" : "inherit" }}
+                className={`fas fa-heart ${navIcons}`}
+              ></div>{" "}
+              Notifications
             </a>
 
             <a
               href={`/${user.username}`}
               className={pathName === `/[username]` ? navItemsActive : navItems}
             >
-              <div className={`fas fa-heart ${navIcons}`}></div> Profile
+              <img src={user.profilePicUrl} className={navImage}></img> Profile
             </a>
+
             {/* Change it later */}
             <a
               href={`/logout`}

@@ -48,3 +48,12 @@
   margin-right: 10px;
   margin-left: 5px;
 }
+
+.navImage {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  border: solid 2px black;
+  margin-right: 10px;
+  margin-left: 5px;
+}

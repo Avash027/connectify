@@ -3,6 +3,8 @@ import { Modal, Button, Spinner, Form } from "react-bootstrap";
 import { profileUpdate } from "../../actions/client/profileAction";
 import uploadPic from "../../utils/client/uploadImage";
 
+//TODO Add options to edit password
+
 const EditModal = ({ user, showEditModal, setShowEditModal }) => {
   const intputRef = useRef();
 

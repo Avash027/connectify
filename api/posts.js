@@ -3,7 +3,14 @@ const UserModel = require("../models/UserModel");
 const PostModel = require("../models/PostModel");
 const FollowerModel = require("../models/FollowerModel");
 const authMiddleware = require("../middleware/authMiddleware");
+const {
+  newLikeNotification,
+  removeLikeNotification,
+  newCommentNotification,
+  removeCommentNotification,
+} = require("../actions/server/notificationActions");
 
+//Add a new post
 router.post("/", authMiddleware, async (req, res) => {
   const { text, location, picUrl } = req.body;
 
@@ -171,9 +178,9 @@ router.post("/like/:postId", authMiddleware, async (req, res) => {
 
     await post.save();
 
-    // if (post.user.toString() !== userId) {
-    //   await newLikeNotification(userId, postId, post.user.toString());
-    // }
+    if (post.user.toString() !== userId) {
+      await newLikeNotification(userId, postId, post.user.toString());
+    }
 
     return res.status(201).send("Post liked");
   } catch (err) {
@@ -205,9 +212,9 @@ router.post("/unlike/:postId", authMiddleware, async (req, res) => {
 
     await post.save();
 
-    // if (post.user.toString() !== userId) {
-    //   await removeLikeNotification(userId, postId, post.user.toString());
-    // }
+    if (post.user.toString() !== userId) {
+      await removeLikeNotification(userId, postId, post.user.toString());
+    }
 
     return res.status(201).send("Post unliked");
   } catch (err) {
@@ -252,15 +259,15 @@ router.post("/comment/:postId", authMiddleware, async (req, res) => {
     await post.comments.unshift(newComment);
     await post.save();
 
-    // if (post.user.toString() !== req.userId) {
-    //   await newCommentNotification(
-    //     postId,
-    //     post.comments[0]._id.toString(),
-    //     req.userId,
-    //     post.user.toString(),
-    //     text
-    //   );
-    // }
+    if (post.user.toString() !== req.userId) {
+      await newCommentNotification(
+        postId,
+        post.comments[0]._id.toString(),
+        req.userId,
+        post.user.toString(),
+        text
+      );
+    }
 
     return res.status(201).send(post.comments[0]._id);
   } catch (err) {
@@ -297,14 +304,14 @@ router.delete(
         await post.comments.splice(index, 1);
         await post.save();
 
-        // if (post.user.toString() !== userId) {
-        //   await removeCommentNotification(
-        //     postId,
-        //     commentId,
-        //     userId,
-        //     post.user.toString()
-        //   );
-        // }
+        if (post.user.toString() !== userId) {
+          await removeCommentNotification(
+            postId,
+            commentId,
+            userId,
+            post.user.toString()
+          );
+        }
 
         return res.status(201).send("Comment deleted");
       }
