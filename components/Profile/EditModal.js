@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { Modal, Button, Spinner, Form } from "react-bootstrap";
-import { profileUpdate } from "../../actions/client/profileAction";
+import {
+  passwordUpdate,
+  profileUpdate,
+} from "../../actions/client/profileAction";
 import uploadPic from "../../utils/client/uploadImage";
-
-//TODO Add options to edit password
 
 const EditModal = ({ user, showEditModal, setShowEditModal }) => {
   const intputRef = useRef();
@@ -12,6 +13,9 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
   const [name, setName] = useState(user.name);
   const [media, setMedia] = useState(user.profilePicUrl);
   const [mediaPreview, setMediaPreview] = useState(user.profilePicUrl);
+  const [changePassword, setChangePassword] = useState(false);
+  const [oldpassword, setOldpassword] = useState("");
+  const [newpassword, setNewpassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -30,8 +34,16 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
     const res = await uploadPic(media);
 
     if (!res) return setError("Error uploading image");
+    setLoading(true);
+    try {
+      await profileUpdate(bio, name, res);
+      if (changePassword) await passwordUpdate(oldpassword, newpassword);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
 
-    await profileUpdate(bio, name, setLoading, setError, res);
+    setLoading(false);
   };
 
   return (
@@ -59,13 +71,45 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
 
           <Form.Group className="mb-3">
             <Form.Control
-              type="textArea"
+              type="text"
               placeholder="Bio"
               name="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
           </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              value={changePassword}
+              onChange={() => setChangePassword(!changePassword)}
+              type="checkbox"
+              label="Change password"
+            />
+          </Form.Group>
+
+          {changePassword && (
+            <>
+              {" "}
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="pasasword"
+                  placeholder="Old Password"
+                  name="oldpassword"
+                  value={oldpassword}
+                  onChange={(e) => setOldpassword(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  type="password"
+                  placeholder="New password"
+                  value={newpassword}
+                  onChange={(e) => setNewpassword(e.target.value)}
+                />
+              </Form.Group>
+            </>
+          )}
 
           <div
             onClick={() => intputRef.current.click()}

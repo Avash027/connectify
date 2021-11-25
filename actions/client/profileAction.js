@@ -34,34 +34,23 @@ export const unfollowUser = async (userToUnFollowId, setUserFollowStats) => {
   }
 };
 
-export const profileUpdate = async (
-  bio,
-  name,
-  setLoading,
-  setError,
-  profilePicUrl
-) => {
+export const profileUpdate = async (bio, name, profilePicUrl) => {
   try {
     await Axios.post(`/update`, {
       bio,
       name,
       profilePicUrl,
     });
-    setLoading(false);
+
     Router.reload();
   } catch (error) {
     alert(error);
-    setError(error);
-    setLoading(false);
   }
 };
 
-export const passwordUpdate = async (setSuccess, userPasswords) => {
+export const passwordUpdate = async (currentPassword, newPassword) => {
   try {
-    const { currentPassword, newPassword } = userPasswords;
-
     await Axios.post(`/settings/password`, { currentPassword, newPassword });
-    setSuccess(true);
   } catch (error) {
     alert(error);
   }
