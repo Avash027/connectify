@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Offcanvas,
-  Button,
-  Stack,
-  Grid,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Offcanvas, Stack } from "react-bootstrap";
 import {
   homeIcon,
   navItems,
@@ -18,6 +10,8 @@ import {
 } from "../styles/Navbar.module.css";
 import Searchbar from "./Searchbar";
 import { useRouter } from "next/router";
+
+import { logoutUser } from "../actions/client/authUser";
 
 const Navbar = ({ user }) => {
   const router = useRouter();
@@ -34,7 +28,7 @@ const Navbar = ({ user }) => {
       <i className={`fas fa-bars fa-2x ${homeIcon}`} onClick={handleOpen}></i>
       <Offcanvas show={showNavbar} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Instagram</Offcanvas.Title>
+          <Offcanvas.Title>Connectify</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body style={{ padding: "0" }}>
           <Stack>
@@ -45,13 +39,7 @@ const Navbar = ({ user }) => {
               <div className={`fas fa-home ${navIcons}`}></div>
               Feed
             </a>
-            <a
-              href="/messages"
-              className={pathName === "/messages" ? navItemsActive : navItems}
-            >
-              <div className={`fab fa-facebook-messenger ${navIcons}`}></div>
-              Messages
-            </a>
+
             <a
               href="/explore"
               className={pathName === "/explore" ? navItemsActive : navItems}
@@ -79,12 +67,12 @@ const Navbar = ({ user }) => {
             </a>
 
             {/* Change it later */}
-            <a
-              href={`/logout`}
+            <div
+              onClick={logoutUser}
               className={pathName === "/logout" ? navItemsActive : navItems}
             >
               <i className={`fas fa-sign-out-alt ${navIcons}`}></i> logout
-            </a>
+            </div>
             <div className={navItemBar}>
               <Searchbar router={router} />
             </div>
@@ -94,5 +82,7 @@ const Navbar = ({ user }) => {
     </>
   );
 };
+
+//TODO ADD spinner to login and singin modal
 
 export default Navbar;

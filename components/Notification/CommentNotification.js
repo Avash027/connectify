@@ -1,12 +1,13 @@
 import { Stack, Image, Button } from "react-bootstrap";
+import styles from "../../styles/Notification.module.css";
 
 const CommentNotification = ({ notification }) => {
   return (
-    <Stack direction="horizontal">
+    <div className={styles.container}>
       <Image
         src={notification.user.profilePicUrl}
         roundedCircle
-        style={{ height: "1.5rem", marginRight: "1rem" }}
+        style={{ height: "1.5rem", width: "1.5rem", marginRight: "1rem" }}
       ></Image>
       <div>
         <strong>{notification.user.username}</strong> commented on your post :
@@ -25,7 +26,7 @@ const CommentNotification = ({ notification }) => {
       >
         View
       </Button>
-    </Stack>
+    </div>
   );
 };
 

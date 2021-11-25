@@ -6,6 +6,11 @@
   grid-template-columns: 2fr 4fr;
 }
 
+.stack {
+  display: flex;
+  justify-content: center;
+}
+
 .imageContainer {
   height: inherit;
   max-height: inherit;
@@ -51,4 +56,30 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 1156px) {
+  .image {
+    height: 10rem;
+    width: 10rem;
+  }
+}
+
+@media only screen and (max-width: 751px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .button {
+    margin: auto;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }

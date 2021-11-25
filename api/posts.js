@@ -37,8 +37,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-//This is actually explore
-router.get("/feed", authMiddleware, async (req, res) => {
+router.get("/explore", authMiddleware, async (req, res) => {
   const { pageNumber } = req.query;
   const number = Number(pageNumber);
   const size = 2;
@@ -67,8 +66,7 @@ router.get("/feed", authMiddleware, async (req, res) => {
   }
 });
 
-//This is actually feed
-router.get("/explore", authMiddleware, async (req, res) => {
+router.get("/feed", authMiddleware, async (req, res) => {
   const { pageNumber } = req.query;
   const number = Number(pageNumber);
   const size = 2;

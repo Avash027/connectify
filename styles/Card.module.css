@@ -1,12 +1,14 @@
 .card {
   display: grid;
   height: 45rem;
-  width: 40%;
+  max-width: 35rem;
+  min-width: 100%;
   border: solid 1px grey;
   border-radius: 5px;
   grid-template-rows: 1fr 5fr 3fr;
   margin: 20px auto;
   min-width: 20rem;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .header {

@@ -26,10 +26,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
 
-    unreadMessage: {
-      type: Boolean,
-      default: false,
-    },
     unreadNotification: {
       type: Boolean,
       default: false,

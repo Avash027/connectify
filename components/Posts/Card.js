@@ -22,6 +22,10 @@ const Card = ({ post, user, setPosts }) => {
     likes.length > 0 &&
     likes.filter((like) => like.user === user._id).length > 0;
 
+  const redirectToUserPage = (username) => {
+    window.location.href = `/${username}`;
+  };
+
   return (
     <>
       <Toast
@@ -76,7 +80,12 @@ const Card = ({ post, user, setPosts }) => {
             ></img>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div className={styles.headerTitle}>{post.user.username}</div>
+            <div
+              onClick={() => redirectToUserPage(post.user.username)}
+              className={styles.headerTitle}
+            >
+              {post.user.username}
+            </div>
 
             <div className={styles.headerSubtitle}>
               {post.location && "@ " + post.location}
@@ -134,7 +143,12 @@ const Card = ({ post, user, setPosts }) => {
           </div>
 
           <div style={{ display: "flex", marginTop: "10px" }}>
-            <strong>{post.user.username}</strong>
+            <strong
+              style={{ cursor: "pointer" }}
+              onClick={() => redirectToUserPage(post.user.username)}
+            >
+              {post.user.username}
+            </strong>
             {"    "}{" "}
             <p style={{ marginLeft: "10px", fontWeight: "200" }}>{post.text}</p>
           </div>

@@ -7,8 +7,6 @@ import {
   signUpText,
 } from "../styles/Login.module.css";
 
-//TODO fix login
-
 import { loginUser } from "../actions/client/authUser";
 
 const login = () => {

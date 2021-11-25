@@ -91,7 +91,7 @@ const ProfileHeader = ({
           ></Image>
         </div>
         <div style={{ display: "flex" }}>
-          <Stack style={{ display: "flex", justifyContent: "center" }} gap={2}>
+          <Stack className={styles.stack} gap={2}>
             <h2 style={{ fontWeight: "200" }}>{profile.user.username}</h2>
             {ownAccount && (
               <Button

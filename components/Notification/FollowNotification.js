@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Stack, Image, Button, Spinner } from "react-bootstrap";
 import { followUser, unfollowUser } from "../../actions/client/profileAction";
+import styles from "../../styles/Notification.module.css";
 
 const FollowNotification = ({
   loggedUserFollowStats,
@@ -27,11 +28,11 @@ const FollowNotification = ({
   };
 
   return (
-    <Stack direction="horizontal">
+    <div className={styles.container}>
       <Image
         src={notification.user.profilePicUrl}
         roundedCircle
-        style={{ height: "1.5rem", marginRight: "1rem" }}
+        style={{ height: "1.5rem", width: "1.5rem", marginRight: "1rem" }}
       ></Image>
       <div>
         <strong>{notification.user.username}</strong> followed you
@@ -52,7 +53,7 @@ const FollowNotification = ({
           "Follow"
         )}
       </Button>
-    </Stack>
+    </div>
   );
 };
 

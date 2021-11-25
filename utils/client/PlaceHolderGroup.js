@@ -3,11 +3,14 @@ import { Placeholder, Card, Stack } from "react-bootstrap";
 export const PlaceHolder = () => {
   return (
     <>
-      <Card style={{ width: "40%", height: "45rem", margin: "auto" }}>
-        <Placeholder as={Card.Title} animation="glow">
-          <Placeholder xs={6} />
-        </Placeholder>
-
+      <Card
+        style={{
+          width: "35rem",
+          maxWidth: "100%",
+          height: "45rem",
+          margin: "auto",
+        }}
+      >
         <Card.Body>
           <Placeholder as={Card.Text} animation="glow">
             <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}

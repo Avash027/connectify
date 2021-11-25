@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  createPostButton,
-  modalPictureUpload,
-  cardContainer,
-} from "../styles/Index.module.css";
+import { cardContainer } from "../styles/Index.module.css";
 import baseUrl from "../utils/client/baseUrl";
 import { parseCookies } from "nookies";
 import axios from "axios";
@@ -11,20 +7,18 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import cookie from "js-cookie";
 import { Alert } from "react-bootstrap";
 
-import Createpost from "../components/Posts/Createpost";
 import Card from "../components/Posts/Card";
 
 import { PlaceHolder, NoPosts } from "../utils/client/PlaceHolderGroup";
 
-function Home({ user, postsData, errorLoading }) {
-  const [showModal, setShowModal] = useState(false);
+function Explore({ user, postsData, errorLoading }) {
   const [posts, setPosts] = useState(postsData);
   const [hasMore, setHasMore] = useState(true);
   const [pageNumber, setPageNumber] = useState(2);
 
   const fetchDataOnScroll = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/api/posts/feed`, {
+      const res = await axios.get(`${baseUrl}/api/posts/explore`, {
         headers: { Authorization: cookie.get("token") },
         params: { pageNumber },
       });
@@ -60,20 +54,6 @@ function Home({ user, postsData, errorLoading }) {
 
   return (
     <>
-      <Createpost
-        setPosts={setPosts}
-        show={showModal}
-        setShowModal={setShowModal}
-        modalPictureUpload={modalPictureUpload}
-      ></Createpost>
-
-      <div
-        className={createPostButton}
-        onClick={() => setShowModal(!showModal)}
-      >
-        <div className="fas fa-plus"></div>
-      </div>
-
       {posts.length === 0 && (
         <Alert
           style={{
@@ -84,7 +64,7 @@ function Home({ user, postsData, errorLoading }) {
           }}
           variant="info"
         >
-          Wow! Your feed is so empty! Follow someone to see their posts
+          Wow! This plae is so empty!
         </Alert>
       )}
 
@@ -116,7 +96,7 @@ export async function getServerSideProps(ctx) {
   try {
     const { token } = parseCookies(ctx);
 
-    const res = await axios.get(`${baseUrl}/api/posts/feed`, {
+    const res = await axios.get(`${baseUrl}/api/posts/explore`, {
       headers: {
         Authorization: token,
       },
@@ -130,4 +110,4 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-export default Home;
+export default Explore;

@@ -5,6 +5,8 @@ import baseUrl from "../utils/client/baseUrl";
 import { Alert } from "react-bootstrap";
 import cookie from "js-cookie";
 
+import styles from "../styles/Notification.module.css";
+
 import LikeNotification from "../components/Notification/LikeNotification";
 import CommentNotification from "../components/Notification/CommentNotification";
 import FollowNotification from "../components/Notification/FollowNotification";
@@ -42,10 +44,7 @@ const notifications = ({
 
   return (
     <>
-      <h1 style={{ position: "absolute", top: "0", left: "4rem" }}>
-        Notifications
-      </h1>
-      <div style={{ padding: "4rem 4rem" }}>
+      <div className={styles.mainContainer}>
         {notifications.map((notification) => (
           <div style={{ margin: "2rem" }} key={notification._id}>
             {notification.type === "newLike" && notification.post != null && (

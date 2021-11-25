@@ -3,7 +3,6 @@ const UserModel = require("../models/UserModel");
 const ProfileModel = require("../models/ProfileModel");
 const FollowerModel = require("../models/FollowerModel");
 const NotificationModel = require("../models/NotificationModel");
-const ChatModel = require("../models/ChatModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const isEmail = require("validator/lib/isEmail");
@@ -68,7 +67,6 @@ router.post("/signup", async (req, res) => {
       userId: user._id,
     };
     await new NotificationModel({ user: user._id, notifications: [] }).save();
-    await new ChatModel({ user: user._id, chats: [] }).save();
 
     jwt.sign(
       payload,
@@ -105,6 +103,11 @@ router.post("/login", async (req, res) => {
     const payload = {
       userId: user._id,
     };
+
+    const notification = await NotificationModel.findOne({ user: user._id });
+
+    if (!notification)
+      await new NotificationModel({ user: user._id, notifications: [] }).save();
 
     jwt.sign(
       payload,

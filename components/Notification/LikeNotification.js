@@ -1,11 +1,13 @@
 import { Stack, Image, Button } from "react-bootstrap";
+import styles from "../../styles/Notification.module.css";
+
 const LikeNotification = ({ user, notification }) => {
   return (
-    <Stack direction="horizontal">
+    <div className={styles.container}>
       <Image
         src={notification.user.profilePicUrl}
         roundedCircle
-        style={{ height: "1.5rem", marginRight: "1rem" }}
+        style={{ height: "1.5rem", width: "1.5rem", marginRight: "1rem" }}
       ></Image>
       <div>
         <strong>{notification.user.username}</strong> liked your post
@@ -17,7 +19,7 @@ const LikeNotification = ({ user, notification }) => {
       >
         View
       </Button>
-    </Stack>
+    </div>
   );
 };
 

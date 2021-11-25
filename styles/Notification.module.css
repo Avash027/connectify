@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainContainer {
+  padding: 4rem 4rem;
+}
+
+@media only screen and (max-width: 492px) {
+  .mainContainer {
+    padding: 4rem 0rem;
+  }
+  .container {
+    justify-content: space-between;
+  }
+}
