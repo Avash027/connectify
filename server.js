@@ -19,6 +19,7 @@ nextApp.prepare().then(() => {
   app.use("/api/profile", require("./api/profile"));
   app.use("/api/search", require("./api/search"));
   app.use("/api/notifications", require("./api/notifications"));
+  app.use("/api/reset", require("./api/reset"));
 
   app.all("*", (req, res) => handle(req, res));
   server.listen(PORT, (error) => {

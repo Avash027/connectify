@@ -99,7 +99,10 @@ const login = () => {
           </Button>
         </Form>
         <div className={signUpText}>
-          Dont have an account a account ? <a href="/signup">Sign up instead</a>
+          Dont have an account? <a href="/signup">Sign up instead</a>
+        </div>
+        <div className={signUpText}>
+          <a href="/reset">Forgot password ? </a>
         </div>
       </div>
     </>
