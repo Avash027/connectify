@@ -14,7 +14,7 @@ const Layout = ({ user, children }) => {
           referrerPolicy="no-referrer"
         />
       </Head>
-      {false && <Navbar user={user}></Navbar>}
+      {user && <Navbar user={user}></Navbar>}
       {user && <Header user={user}></Header>}
       {children}
     </>

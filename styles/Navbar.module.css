@@ -4,6 +4,7 @@
   height: 15px;
   width: 15px;
   margin-right: 200px;
+  visibility: none;
 }
 
 .navItems {
@@ -57,3 +58,9 @@
   margin-right: 10px;
   margin-left: 5px;
 }
+
+/* @media only screen and(max-width:1070px) {
+  .homeIcon {
+    visibility: visible;
+  }
+} */

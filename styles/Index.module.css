@@ -43,3 +43,9 @@
   margin-top: 5rem;
   width: 100%;
 }
+
+@media only screen and (max-width: 950px) {
+  .cardContainer {
+    margin-top: 1rem;
+  }
+}

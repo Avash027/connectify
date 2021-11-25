@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  visibility: visible;
 }
 .iconSet {
   display: flex;
@@ -74,4 +75,10 @@
   font-weight: 700;
   margin-left: 1rem;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 950px) {
+  .headerContainer {
+    visibility: hidden;
+  }
 }
