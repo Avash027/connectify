@@ -1,3 +1,6 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000"
+    : "https://connectify-socialmedia.herokuapp.com";
 
 export default baseUrl;
