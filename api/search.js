@@ -9,7 +9,7 @@ router.get("/:username", authMiddleware, async (req, res) => {
     });
     res.status(201).json(usernames);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).send("Internal server error");
   }
 });

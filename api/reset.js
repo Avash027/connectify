@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
       `,
     };
 
-    transporter.sendMail(mailOptions, (err, info) => err && console.log(err));
+    transporter.sendMail(mailOptions, (err, info) => err && console.error(err));
 
     return res.status(200).send("Email sent");
   } catch (error) {
@@ -57,7 +57,6 @@ router.post("/", async (req, res) => {
 router.post("/token", async (req, res) => {
   try {
     const { token, password } = req.body;
-    console.log(password);
 
     if (!token) return res.status(401).send("Invalid token");
     if (!password || password.length < 6)

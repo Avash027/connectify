@@ -133,8 +133,8 @@ router.get("/user", authMiddleware, async (req, res) => {
 
     res.status(200).json({ user, userFollowStats });
   } catch (error) {
-    console.log(error);
-    res.status(400).send("Unathorized");
+    console.error(error);
+    res.status(501).send("Internal server error");
   }
 });
 

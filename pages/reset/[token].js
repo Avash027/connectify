@@ -16,17 +16,6 @@ const ResetToken = () => {
 
   const { field1, field2 } = newPassword;
 
-  const handleChange = (e) => {
-    const { name, value } = e;
-
-    console.log(name, value);
-
-    setNewPassword((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

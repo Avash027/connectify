@@ -2,6 +2,7 @@ import axios from "axios";
 import baseUrl from "../../utils/client/baseUrl";
 import cookie from "js-cookie";
 import Router from "next/router";
+import logErrors from "../../utils/client/logErrors";
 
 //TODO Set proper error message
 export const registerUser = async (user, setError, setLoading) => {
@@ -11,7 +12,7 @@ export const registerUser = async (user, setError, setLoading) => {
     });
     setToken(data);
   } catch (err) {
-    setError(true);
+    setError(logErrors(err));
   }
   setLoading(false);
 };
@@ -24,8 +25,8 @@ export const loginUser = async (user, setError) => {
 
     setToken(data);
   } catch (err) {
-    console.log(err);
-    setError(true);
+    console.error(err);
+    logErrors(err);
   }
 };
 

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Form, Button, InputGroup, FormControl, Toast } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  InputGroup,
+  FormControl,
+  Toast,
+  Spinner,
+} from "react-bootstrap";
 import {
   container,
   header,
@@ -15,9 +22,8 @@ const login = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,15 +51,15 @@ const login = () => {
           className="p-3"
           position="top-left"
           bg="light"
-          onClose={() => setError(false)}
+          onClose={() => setError(null)}
           delay={3000}
           autohide
-          show={error}
+          show={error !== null}
         >
           <Toast.Header>
             <strong className="me-auto">Connectify</strong>
           </Toast.Header>
-          <Toast.Body>Invalid credentials</Toast.Body>
+          <Toast.Body>{error}</Toast.Body>
         </Toast>
       </div>
       <div className={container}>
@@ -95,7 +101,21 @@ const login = () => {
             type="submit"
             disabled={formLoading}
           >
-            Submit
+            {formLoading ? (
+              <>
+                {" "}
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />{" "}
+                Loading..{" "}
+              </>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </Form>
         <div className={signUpText}>

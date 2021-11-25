@@ -9,7 +9,8 @@ import { parseCookies } from "nookies";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import cookie from "js-cookie";
-import { Alert } from "react-bootstrap";
+import { Alert, Toast } from "react-bootstrap";
+import logErrors from "../utils/client/logErrors";
 
 import Createpost from "../components/Posts/Createpost";
 import Card from "../components/Posts/Card";
@@ -21,6 +22,7 @@ function Home({ user, postsData, errorLoading }) {
   const [posts, setPosts] = useState(postsData);
   const [hasMore, setHasMore] = useState(true);
   const [pageNumber, setPageNumber] = useState(2);
+  const [error, setError] = useState(null);
 
   const fetchDataOnScroll = async () => {
     try {
@@ -34,7 +36,8 @@ function Home({ user, postsData, errorLoading }) {
       setPosts((prev) => [...prev, ...res.data]);
       setPageNumber((prev) => prev + 1);
     } catch (error) {
-      alert("Error Fetching post");
+      setHasMore(false);
+      setError(logErrors(error));
     }
   };
 
@@ -60,6 +63,19 @@ function Home({ user, postsData, errorLoading }) {
 
   return (
     <>
+      <Toast
+        className="p-3"
+        position="top-left"
+        bg="light"
+        onClose={() => setError(null)}
+        delay={3000}
+        show={error !== null}
+      >
+        <Toast.Header>
+          <strong className="me-auto">Connectify</strong>
+        </Toast.Header>
+        <Toast.Body>{error}</Toast.Body>
+      </Toast>
       <Createpost
         setPosts={setPosts}
         show={showModal}
@@ -74,7 +90,7 @@ function Home({ user, postsData, errorLoading }) {
         <div className="fas fa-plus"></div>
       </div>
 
-      {posts.length === 0 && (
+      {(error || posts.length === 0) && (
         <Alert
           style={{
             width: "80%",
@@ -88,7 +104,7 @@ function Home({ user, postsData, errorLoading }) {
         </Alert>
       )}
 
-      {posts && posts.length > 0 && (
+      {error === null && posts && posts.length > 0 && (
         <div className={cardContainer}>
           <InfiniteScroll
             hasMore={hasMore}

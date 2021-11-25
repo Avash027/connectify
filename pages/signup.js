@@ -31,9 +31,9 @@ const signup = () => {
   const [username, setusername] = useState("");
   const [usernameLoading, setusernameLoading] = useState(false);
   const [usernameAvailable, setusernameAvailable] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formLoading, setFormLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,15 +87,15 @@ const signup = () => {
           className="p-3"
           position="top-left"
           bg="light"
-          onClose={() => setError(false)}
+          onClose={() => setError(null)}
           delay={3000}
           autohide
-          show={error}
+          show={error !== null}
         >
           <Toast.Header>
             <strong className="me-auto">Connectify</strong>
           </Toast.Header>
-          <Toast.Body>Invalid credentials</Toast.Body>
+          <Toast.Body>{error}</Toast.Body>
         </Toast>
       </div>
       <div className={container}>
@@ -183,7 +183,21 @@ const signup = () => {
             loading={formLoading}
             disabled={formLoading}
           >
-            Submit
+            {formLoading ? (
+              <>
+                {" "}
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />{" "}
+                Loading..{" "}
+              </>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </Form>
         <div className={signUpText}>

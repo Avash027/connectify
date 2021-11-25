@@ -57,6 +57,15 @@ const UserProfile = ({
         postsLength={posts.length}
       />
 
+      {posts.length === 0 && (
+        <Alert
+          style={{ textAlign: "center", margin: "auto", width: "60%" }}
+          variant="info"
+        >
+          User has not posted anything yet
+        </Alert>
+      )}
+
       {posts.length > 0 &&
         posts.map((post) => (
           <Card
@@ -89,7 +98,6 @@ export async function getServerSideProps(ctx) {
   try {
     const { username } = ctx.query;
     const { token } = parseCookies(ctx);
-    console.log(username);
 
     const res = await axios.get(`${baseUrl}/api/profile/${username}`, {
       headers: { Authorization: token },

@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
-import { Modal, Button, Spinner, Form } from "react-bootstrap";
+import { Modal, Button, Spinner, Form, Alert } from "react-bootstrap";
 import {
   passwordUpdate,
   profileUpdate,
 } from "../../actions/client/profileAction";
 import uploadPic from "../../utils/client/uploadImage";
+import logErrors from "../../utils/client/logErrors";
 
 const EditModal = ({ user, showEditModal, setShowEditModal }) => {
   const intputRef = useRef();
@@ -17,7 +18,7 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
   const [oldpassword, setOldpassword] = useState("");
   const [newpassword, setNewpassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -40,7 +41,7 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
       if (changePassword) await passwordUpdate(oldpassword, newpassword);
     } catch (error) {
       console.error(error);
-      setError(error);
+      setError(logErrors(error));
     }
 
     setLoading(false);
@@ -50,6 +51,19 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
     <Modal centered show={showEditModal} onHide={() => setShowEditModal(false)}>
       <Modal.Header closeButton>Edit Changes</Modal.Header>
       <Modal.Body>
+        {error !== null && (
+          <Alert
+            style={{ margin: "2rem auto", width: "80%", textAlign: "center" }}
+            variant="danger"
+          >
+            <span
+              className="fas fa-times-circle"
+              style={{ color: "red", marginRight: "1rem" }}
+            ></span>{" "}
+            {error}
+          </Alert>
+        )}
+
         <Form>
           <input
             type="file"

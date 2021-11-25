@@ -38,7 +38,7 @@ router.get("/:username", authMiddleware, async (req, res) => {
           : 0,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).send("Internal server error");
   }
 });
@@ -59,7 +59,7 @@ router.get("/posts/:username", authMiddleware, async (req, res) => {
 
     return res.status(200).json(posts);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(500).send("Internal server error");
   }
 });
@@ -76,7 +76,7 @@ router.get("/followers/:userId", authMiddleware, async (req, res) => {
 
     res.status(201).json(user.followers);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(500).send("Internal server error");
   }
 });
@@ -93,7 +93,7 @@ router.get("/following/:userId", authMiddleware, async (req, res) => {
 
     res.status(201).json(user.following);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(500).send("Internal server error");
   }
 });
@@ -129,7 +129,7 @@ router.post("/follow/:userToFollowId", authMiddleware, async (req, res) => {
 
     return res.status(201).send("Success");
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(501).send("Internal server error");
   }
 });
@@ -174,7 +174,7 @@ router.put("/unfollow/:userToUnFollowId", authMiddleware, async (req, res) => {
 
     return res.status(200).send("Success");
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(501).send("Internal server error");
   }
 });
@@ -209,7 +209,7 @@ router.post("/update", authMiddleware, async (req, res) => {
 
     return res.status(200).send("success");
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(501).send("Internal server error");
   }
 });
@@ -236,7 +236,7 @@ router.post("/settings/password", authMiddleware, async (req, res) => {
 
     return res.status(201).send("Updated");
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(501).send("Internal server error");
   }
 });
