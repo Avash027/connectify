@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Header from "./Header";
 import Navbar from "./Navbar";
 
 const Layout = ({ user, children }) => {
@@ -13,7 +14,8 @@ const Layout = ({ user, children }) => {
           referrerPolicy="no-referrer"
         />
       </Head>
-      {user && <Navbar user={user}></Navbar>}
+      {false && <Navbar user={user}></Navbar>}
+      {user && <Header user={user}></Header>}
       {children}
     </>
   );

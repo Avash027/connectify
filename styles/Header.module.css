@@ -1,0 +1,77 @@
+.headerContainer {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 4rem;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.iconSet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navItems {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+  padding: 20px 10px;
+  cursor: pointer;
+  margin: 0 1rem;
+  justify-self: center;
+}
+
+.navItemsActive {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 20px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: black;
+  margin: 0 1rem;
+}
+
+.navItemsActive:hover {
+  color: white;
+}
+
+.navItems:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navIcons {
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.navImage {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  border: solid 2px black;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.searchbar {
+  border-radius: 20px;
+}
+
+.heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  cursor: pointer;
+}

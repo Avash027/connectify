@@ -5,9 +5,9 @@ import axios from "axios";
 import baseUrl from "../utils/client/baseUrl";
 import cookie from "js-cookie";
 
-//TODO hanndle no profile
+import styles from "../styles/Header.module.css";
 
-const Searchbar = ({ router }) => {
+const Searchbar = ({ header }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
@@ -38,9 +38,9 @@ const Searchbar = ({ router }) => {
 
   return (
     <>
-      <InputGroup>
+      <InputGroup style={{ borderRadius: "20px" }}>
         <AsyncTypeahead
-          style={{ width: "100%", height: "60px" }}
+          style={{ width: "100%", height: "40px" }}
           filterBy={filterBy}
           id="async-example"
           ref={ref}
@@ -68,6 +68,7 @@ const Searchbar = ({ router }) => {
         />
 
         <Button
+          className={header ? styles.button : ""}
           variant="outline-secondary"
           onClick={() => handleClick(ref.current.state.text)}
         >
