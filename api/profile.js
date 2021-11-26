@@ -5,7 +5,7 @@ const PostModel = require("../models/PostModel");
 const FollowerModel = require("../models/FollowerModel");
 const ProfileModel = require("../models/ProfileModel");
 const authMiddleware = require("../middleware/authMiddleware");
-//TODO
+
 const {
   newFollowerNotification,
   removeFollowerNotification,

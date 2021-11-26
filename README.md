@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Connectify (Full stack NextJS social media app)
 
-## Getting Started
+<strong>Website live at : [here](https://connectify-socialmedia.herokuapp.com/)</strong>
 
-First, run the development server:
+## API Documentation
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+| Type   | Route                                   | Access  | Description                                                                                            |
+| ------ | --------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| GET    | /api/auth/user/:username                | Public  | Return success if username is unique                                                                   |
+| POST   | /api/auth/signup                        | Public  | If all the fields are valid then the user is added to the database and a success response is sent back |
+| POST   | /api/auth/login                         | Public  | If the user is already signed up then it sends a success code and a JWT Token                          |
+| POST   | /api/auth/user                          | Private | If the user is valid then it returns user and user follow stats                                        |
+| GET    | /api/notifications                      | Private | Returns all the notifications if the user is valid                                                     |
+| POST   | /api/notifications                      | Private | Changes the unread notifications to false and send a success response if user is valid                 |
+| POST   | /api/posts                              | Private | Adds a new post to the database if the user and all post details is valid and return the new post      |
+| GET    | /api/posts/explore                      | Private | Returns all the posts by all the users in descending order of created time                             |
+| GET    | /api/posts/feed                         | Private | Returns all the posts by the people whom the user is following                                         |
+| DELETE | /api/posts/:postId                      | Private | Deletes the post and return the success code                                                           |
+| POST   | /api/posts/like/:postId                 | Private | Adds a like by the user to the post and return a sucess code                                           |
+| POST   | /api/posts/unlike/:postId               | Private | Removes the like by the user (if any)                                                                  |
+| GET    | /api/posts/like/:postId                 | Private | Gets all the likes on the post                                                                         |
+| POST   | /api/posts/comment/:postId              | Private | Adds a comment by the user to the desired post                                                         |
+| DELETE | /api/posts/comment/:postId/:commentId   | Private | Deletes the specific comment made by the user                                                          |
+| GET    | /api/profile/:username                  | Private | Returns the profile as per the username param                                                          |
+| GET    | /api/profile/posts/:username            | Private | Returns all the posts by the username                                                                  |
+| GET    | /api/profile/followers/:userId          | Private | Returns all the followers of the user                                                                  |
+| GET    | /api/profile/following/:userId          | Private | Returns all the people user is following                                                               |
+| POST   | /api/profile/follow/:userToFollowId     | Private | Adds userToFollow to the following of user and user to followers of userToFollow                       |
+| POST   | /api/profile/unfollow/:userToUnFollowId | Private | Removes userToUnFollow from the following of user and user from followers of userToUnFollow            |
+| POST   | /api/profile/update                     | Private | Updates user name, bio and profile picture                                                             |
+| POST   | /api/profile/settings/password          | Private | Updates user password                                                                                  |
+| GET    | /api/reset                              | Public  | Mails a reset token to the user                                                                        |
+| POST   | /api/reset                              | Public  | Validates the reset token and updates the user password                                                |
+| GET    | /api/search/:username                   | Private | Sends all the username which have a prefix the username param                                          |
