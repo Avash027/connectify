@@ -2,6 +2,29 @@
 
 <strong>Website live at : [here](https://connectify-socialmedia.herokuapp.com/)</strong>
 
+## Tech Stack used
+
+1. **NextJS** for server side rendering react app
+2. **Express** middleware on the backened to handle routes and requests
+3. **Mongoose** for the database schema and performing operations
+4. **MongoDB** used as a database
+5. **Bootstrap** for front-end styling
+6. **nookies and js-cookies** for storing tokens in cookies
+
+## Features
+
+1. Users can post and also like and comment on posts
+2. SEO friendly (thanks to NextJs :P)
+3. Users can follow others. Their following and followers count is also visible
+4. Users can reset password through email OTP service
+5. Users are notified when someone likes or comments on their post or when someone follows them
+6. Users can edit their profile details from profile page
+
+## Future plans
+
+- [ ] Add a stories section
+- [ ] Add more colors to the front end (It's pretty black and white now )
+
 ## API Documentation
 
 | Type   | Route                                   | Access  | Description                                                                                            |
@@ -32,3 +55,48 @@
 | GET    | /api/reset                              | Public  | Mails a reset token to the user                                                                        |
 | POST   | /api/reset                              | Public  | Validates the reset token and updates the user password                                                |
 | GET    | /api/search/:username                   | Private | Sends all the username which have a prefix the username param                                          |
+
+## Found a bug 🐛
+
+Raise an issue. I'll try to fix it as soon as possible
+
+## Install this project
+
+```bash
+git clone https://github.com/Avash027/connectify.git
+```
+
+To install all dependencies
+
+```bash
+npm install
+```
+
+Now create a .env file in the root directory
+
+```
+MONGO_URI = (Database URL provided by the MonogDB atlas)
+SECRET_KEY = (For JWT Authentication)
+NODE_ENV = (production/deployment as per the use)
+MAIL_KEY = (Secret key provided by sendgrid)
+```
+
+To run this project locally
+
+```bash
+npm run start
+```
+
+## Some relevant links of the tool I have used in the project
+
+1. [NextJS](https://nextjs.org/docs/getting-started)
+2. [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+3. [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+4. [Express](https://expressjs.com/)
+5. [Mongoose](https://mongoosejs.com/docs/)
+6. [MongoDB](https://docs.mongodb.com/)
+7. [NodeJS](https://nodejs.org/en/docs/)
+
+## Authors
+
+- [@Avash Mitra](https://github.com/Avash027)
