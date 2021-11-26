@@ -81,6 +81,23 @@ NODE_ENV = (production/deployment as per the use)
 MAIL_KEY = (Secret key provided by sendgrid)
 ```
 
+Now create a next.config.js in the root directory and the following code
+
+```js
+const withPWA = require("next-pwa");
+
+module.exports = withPWA({
+  env: {
+    CLOUDINARY_URL: "Paste your coludinary url here",
+  },
+  pwa: {
+    dest: "public",
+    register: true,
+    sw: "/sw.js",
+  },
+});
+```
+
 To run this project locally
 
 ```bash
