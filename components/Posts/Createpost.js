@@ -104,6 +104,7 @@ const Createpost = ({ show, setShowModal, setPosts, modalPictureUpload }) => {
               <Button variant="secondary">Browse Image</Button>
             ) : (
               <img
+                alt="Post image"
                 style={{ height: "20rem", width: "100%", borderRadius: "5px" }}
                 src={mediaPreview}
               ></img>

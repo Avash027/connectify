@@ -87,6 +87,7 @@ const FollowerModal = ({
                 direction="horizontal"
               >
                 <Image
+                  alt="Profile picture"
                   src={follower.user.profilePicUrl}
                   roundedCircle
                   style={{ height: "40px" }}

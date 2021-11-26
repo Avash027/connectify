@@ -30,6 +30,7 @@ const FollowNotification = ({
   return (
     <div className={styles.container}>
       <Image
+        alt="Profile picture"
         src={notification.user.profilePicUrl}
         roundedCircle
         style={{ height: "1.5rem", width: "1.5rem", marginRight: "1rem" }}

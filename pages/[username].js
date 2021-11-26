@@ -5,6 +5,7 @@ import { parseCookies } from "nookies";
 import baseUrl from "../utils/client/baseUrl";
 import { Alert } from "react-bootstrap";
 import cookie from "js-cookie";
+import Head from "next/head";
 
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import Card from "../components/Posts/Card";
@@ -46,6 +47,56 @@ const UserProfile = ({
 
   return (
     <>
+      <Head>
+        <title>{profile.user.username} | Connectify</title>
+        <meta
+          name="description"
+          content={`This is the profile page of ${
+            profile.user.name
+          }. ${profile.user.name
+            .split(" ")[0]
+            .toString()} has ${followersLength} followers and is following ${followingLength}`}
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <meta
+          itemProp="name"
+          content={`${profile.user.username} | Connectify`}
+        />
+        <meta
+          itemProp="description"
+          content={`This is the profile page of ${
+            profile.user.name
+          }. ${profile.user.name
+            .split(" ")[0]
+            .toString()} has ${followersLength} followers and is following ${followingLength}`}
+        />
+        <meta itemProp="image" content={profile.user.profilePicUrl} />
+
+        <meta
+          name="twitter:card"
+          content={`This is the profile page of ${
+            profile.user.name
+          }. ${profile.user.name
+            .split(" ")[0]
+            .toString()} has ${followersLength} followers and is following ${followingLength}`}
+        />
+        <meta name="twitter:site" content="Connectify" />
+        <meta
+          name="twitter:title"
+          content={`${profile.user.username} | Connectify`}
+        />
+        <meta
+          name="twitter:description"
+          content={`This is the profile page of ${
+            profile.user.name
+          }. ${profile.user.name
+            .split(" ")[0]
+            .toString()} has ${followersLength} followers and is following ${followingLength}`}
+        />
+        <meta name="twitter:creator" content={profile.user.username} />
+        <meta name="twitter:image:src" content={profile.user.profilePicUrl} />
+      </Head>
       <ProfileHeader
         profile={profile}
         user={user}

@@ -73,7 +73,6 @@ const FollowingModal = ({
                 (curfollowing) => curfollowing.user === following.user._id
               ).length > 0;
 
-            //TODO FIX CSS BUG IN THE DIV
             return (
               <div
                 style={{
@@ -87,6 +86,7 @@ const FollowingModal = ({
                 direction="horizontal"
               >
                 <Image
+                  alt="Profile picture"
                   src={following.user.profilePicUrl}
                   roundedCircle
                   style={{ height: "40px" }}

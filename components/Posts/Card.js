@@ -75,6 +75,7 @@ const Card = ({ post, user, setPosts }) => {
             }}
           >
             <img
+              alt="Profile picture"
               src={post.user.profilePicUrl}
               className={styles.profileImage}
             ></img>
@@ -111,6 +112,7 @@ const Card = ({ post, user, setPosts }) => {
 
         <div>
           <img
+            alt="Post Image"
             className={styles.postImage}
             src={post.picUrl}
             onClick={() => setShowModal(true)}

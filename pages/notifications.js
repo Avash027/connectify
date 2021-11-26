@@ -11,7 +11,6 @@ import LikeNotification from "../components/Notification/LikeNotification";
 import CommentNotification from "../components/Notification/CommentNotification";
 import FollowNotification from "../components/Notification/FollowNotification";
 
-//TODO ADD LIKES AND COMMENT MODAL
 const notifications = ({
   notifications,
   errorLoading,

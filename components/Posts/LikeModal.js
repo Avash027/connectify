@@ -54,6 +54,7 @@ export default function LikeModal({
                   style={{ marginBottom: "1rem" }}
                 >
                   <Image
+                    alt="Profile picture"
                     src={like.user.profilePicUrl}
                     roundedCircle
                     style={{ height: "40px", width: "40px" }}

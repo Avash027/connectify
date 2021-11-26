@@ -138,6 +138,7 @@ const EditModal = ({ user, showEditModal, setShowEditModal }) => {
               <Button variant="secondary">Browse Image</Button>
             ) : (
               <img
+                alt="Profile picture"
                 style={{
                   height: "20rem",
                   width: "100%",

@@ -28,7 +28,11 @@ const CardModal = ({
       <Modal.Body>
         <div className={styles.modalContainer}>
           <div>
-            <img src={post.picUrl} className={styles.modalImage}></img>
+            <img
+              alt="Post image"
+              src={post.picUrl}
+              className={styles.modalImage}
+            ></img>
           </div>
 
           <div>

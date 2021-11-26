@@ -11,6 +11,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import cookie from "js-cookie";
 import { Alert, Toast } from "react-bootstrap";
 import logErrors from "../utils/client/logErrors";
+import Head from "next/head";
 
 import Createpost from "../components/Posts/Createpost";
 import Card from "../components/Posts/Card";
@@ -63,6 +64,34 @@ function Home({ user, postsData, errorLoading }) {
 
   return (
     <>
+      <Head>
+        <title>{user.username} | Connectify</title>
+        <meta
+          name="description"
+          content={`Connectify is a social media app where users can follow others , posts there experiences and see what others are posting`}
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <meta itemProp="name" content={`${user.username} | Connectify`} />
+        <meta
+          itemProp="description"
+          content={`Connectify is a social media app where users can follow others , posts there experiences and see what others are posting`}
+        />
+        <meta itemProp="image" content={user.profilePicUrl} />
+
+        <meta
+          name="twitter:card"
+          content={`Connectify is a social media app where users can follow others , posts there experiences and see what others are posting`}
+        />
+        <meta name="twitter:site" content="Connectify" />
+        <meta name="twitter:title" content={`${user.username} | Connectify`} />
+        <meta
+          name="twitter:description"
+          content={`Connectify is a social media app where users can follow others , posts there experiences and see what others are posting`}
+        />
+        <meta name="twitter:creator" content={user.username} />
+        <meta name="twitter:image:src" content={user.profilePicUrl} />
+      </Head>
       <Toast
         className="p-3"
         position="top-left"

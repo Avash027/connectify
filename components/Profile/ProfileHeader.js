@@ -8,9 +8,6 @@ import FollowerModal from "./FollowerModal";
 import FollowingModal from "./FollowingModal";
 import EditModal from "./EditModal";
 
-//TODO : when following someone it is not added to following list unless re rendered
-//Please kill me
-
 const ProfileHeader = ({
   profile,
   followersLength,
@@ -24,7 +21,7 @@ const ProfileHeader = ({
   const [showFollowerModal, setShowFollowerModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false); // TODO
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const isFollowing =
     loggedUserFollowStats.following.length > 0 &&
@@ -85,6 +82,7 @@ const ProfileHeader = ({
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <Image
+            alt="Profile picture"
             src={profile.user.profilePicUrl}
             className={styles.image}
             roundedCircle
