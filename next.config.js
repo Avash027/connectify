@@ -8,5 +8,7 @@ module.exports = withPWA({
     dest: "public",
     register: true,
     sw: "/sw.js",
+    scope: "/app",
   },
+  ignoreBuildErrors: true,
 });
