@@ -139,7 +139,6 @@ const getPosts = async (setLoading, username, token, setPosts) => {
 
     setPosts(res.data);
   } catch (e) {
-    console.error(e);
     alert("Error loading post");
   }
   setLoading(false);

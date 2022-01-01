@@ -34,7 +34,7 @@ const notifications = ({
           }
         );
       } catch (e) {
-        console.error(e);
+        alert(e);
       }
     };
 
@@ -79,7 +79,6 @@ export async function getServerSideProps(ctx) {
 
     return { props: { notifications: res.data } };
   } catch (error) {
-    console.error(error);
     return { props: { errorLoading: true } };
   }
 }

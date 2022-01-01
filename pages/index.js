@@ -170,7 +170,7 @@ export async function getServerSideProps(ctx) {
 
     return { props: { postsData: res.data } };
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return { props: { errorLoading: true, postsData: [] } };
   }
 }

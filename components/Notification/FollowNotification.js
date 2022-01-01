@@ -21,9 +21,7 @@ const FollowNotification = ({
       if (isFollowing)
         await unfollowUser(notification.user._id, setLoggedUserFollowStats);
       else await followUser(notification.user._id, setLoggedUserFollowStats);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
     setDisabled(false);
   };
 

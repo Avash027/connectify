@@ -17,7 +17,7 @@
   background-color: white;
   border-radius: 5px;
   padding: 20px;
-  height: 66vh;
+  min-height: 70vh;
   box-shadow: 0rem 2rem 5rem var(--shadow-light);
 }
 

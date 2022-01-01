@@ -123,6 +123,9 @@ const login = () => {
         </div>
         <div className={signUpText}>
           <a href="/reset">Forgot password ? </a>
+          <br></br>
+          <p>Test email: test@gmail.com</p>
+          <p>Password : test123</p>
         </div>
       </div>
     </>
